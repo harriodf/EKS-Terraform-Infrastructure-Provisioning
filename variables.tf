@@ -2,20 +2,20 @@
 variable "aws_region" {
   description = "AWS region to deploy into"
   type        = string
-  default     = "us-west-1"
+  default     = "us-east-1"
 }
 
 variable "cluster_name" {
   description = "Name of the EKS cluster; also used as a prefix for related resources"
   type        = string
-  default     = "smartcloud-eks"
+  default     = "harricloud-eks"
 }
 
 # ---- Networking ----
 variable "vpc_name" {
   description = "Name tag of the VPC"
   type        = string
-  default     = "smartcloud-vpc"
+  default     = "harricloud-vpc"
 }
 
 variable "vpc_cidr" {
@@ -68,50 +68,50 @@ variable "cluster_endpoint_public_access_cidrs" {
 variable "cluster_admin_arns" {
   description = "Extra IAM users/roles that get cluster-admin. The identity that runs terraform apply (the GitHub OIDC role) is admin automatically, so do NOT list it here."
   type        = list(string)
-  default     = ["arn:aws:iam::060647991200:user/terraform"]
+  default     = ["arn:aws:iam::916657620282:user/harricloud-local-terraform"]
 }
 
 # ---- Worker nodes ----
 variable "node_instance_types" {
   description = "EC2 instance types for the managed node group"
   type        = list(string)
-  default     = ["t2.medium"]
+  default     = ["m7i-flex.large"]
 }
 
 variable "node_capacity_type" {
   description = "ON_DEMAND or SPOT"
   type        = string
-  default     = "SPOT"
+  default     = "ON_DEMAND"
 }
 
 variable "node_disk_size" {
   description = "Root disk size (GiB) of each worker node"
   type        = number
-  default     = 20
+  default     = 50
 }
 
 variable "node_desired_size" {
   description = "Desired number of worker nodes"
   type        = number
-  default     = 5 # 4 x t2.medium hit the 17-pods-per-node limit
+  default     = 3
 }
 
 variable "node_min_size" {
   description = "Minimum number of worker nodes"
   type        = number
-  default     = 5
+  default     = 2
 }
 
 variable "node_max_size" {
   description = "Maximum number of worker nodes"
   type        = number
-  default     = 12
+  default     = 3
 }
 
 variable "key_pair_name" {
   description = "Name of the EC2 key pair (private key is written to <name>.pem)"
   type        = string
-  default     = "smartcloud-eks-key"
+  default     = "harricloud-eks-key"
 }
 
 # ---- Helm chart versions ----
@@ -161,14 +161,14 @@ variable "letsencrypt_server" {
 variable "letsencrypt_email" {
   description = "Optional contact email for the Let's Encrypt account"
   type        = string
-  default     = "chukwunonsosmartagbawo@gmail.com"
+  default     = "okuofuharriet@gmail.com"
 }
 
 # ---- Argo CD ----
 variable "argocd_hostname" {
   description = "Public hostname for the Argo CD UI (must match manifests/argocd-ingress.yaml)"
   type        = string
-  default     = "argocd.digitalwitch.online"
+  default     = "argocd.harricloud.online"
 }
 
 # ---- EFS ----
@@ -182,7 +182,7 @@ variable "efs_transition_to_ia" {
 variable "kubeconfig_bucket" {
   description = "S3 bucket where the admin kubeconfig is uploaded"
   type        = string
-  default     = "terrformstate-060647991200"
+  default     = "terraform-state-916657620282"
 }
 
 variable "kubeconfig_s3_key" {
