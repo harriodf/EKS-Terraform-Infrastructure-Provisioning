@@ -5,7 +5,7 @@
 # ---- EKS ----
 output "eks_cluster_name" {
   description = "Name of the EKS cluster"
-  value = aws_eks_cluster.eks.name
+  value       = aws_eks_cluster.eks.name
 }
 
 output "eks_cluster_endpoint" {
