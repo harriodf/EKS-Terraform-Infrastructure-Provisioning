@@ -21,7 +21,6 @@ env:
   TF_INPUT: "false"
 
 jobs:
-  ---------------------------------------------------------------------------
   init:
     name: terraform init & validate
     runs-on: ubuntu-latest
